@@ -4,6 +4,7 @@ import io.javalin.Javalin;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import software.ulpgc.control.CommandFactory;
+import software.ulpgc.control.commands.WorkingDateCommand;
 import software.ulpgc.control.commands.WorkingDaysCommand;
 import software.ulpgc.view.adapters.WorkingDaysAdapter;
 import software.ulpgc.view.adapters.WorkingDateAdapter;
@@ -30,12 +31,12 @@ public class WorkingDaysService {
                 .start(port);
     }
 
-    private CommandFactory.Builder workingDaysBuilder() {
-        return ((req, res) -> new WorkingDaysCommand(WorkingDaysAdapter.inputOf(req), WorkingDaysAdapter.outputOf(res)));
+    private static CommandFactory.Builder workingDaysBuilder() {
+        return (req, res) -> new WorkingDaysCommand(WorkingDaysAdapter.inputOf(req), WorkingDaysAdapter.outputOf(res));
     }
 
-    private CommandFactory.Builder workingDateBuilder() {
-        return ((req, res) -> new WorkingDaysCommand(WorkingDateAdapter.inputOf(req), WorkingDateAdapter.outputOf(res)));
+    private static CommandFactory.Builder workingDateBuilder() {
+        return (req, res) -> new WorkingDateCommand(WorkingDateAdapter.inputOf(req), WorkingDateAdapter.outputOf(res));
     }
 
     public void stop() {
