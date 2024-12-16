@@ -19,11 +19,11 @@ public class WorkingDaysCommand implements Command {
     @Override
     public void execute() {
         Iterator<LocalDate> iterator = new WorkingDaysCalendar().iteratorFor(input.start());
-        LocalDate end = input.start();
+        LocalDate current = input.start();
         int workingDays = 0;
-        for (int i = 0; i < input.workingDays(); i++) {
+        while (current.isBefore(input.end())) {
             workingDays++;
-            end = iterator.next();
+            current = iterator.next();
         }
         output.workingDays(workingDays);
     }
@@ -31,7 +31,7 @@ public class WorkingDaysCommand implements Command {
     public interface Input {
         LocalDate start();
 
-        int workingDays();
+        LocalDate end();
     }
 
     public interface Output {
